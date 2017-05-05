@@ -1,0 +1,85 @@
+body{
+    font-family: 'Raleway', sans-serif !important;
+}
+
+button{
+    &:active{
+        outline: none;
+    }
+    &:focus{
+        outline: 0;
+    }
+}
+
+@gold: #ffda6e;
+@purple: #7e2674;
+@box-shadow: rgba(0,0,0,.3);
+
+.btn-gold{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: @gold;
+    width: 100px;
+    height: 30px;
+    color: @purple;
+    border-radius: 0;
+    border: 0;
+    line-height: 30px;
+    position: relative;
+    .transition(background,.3s);
+    &:after{
+        .btn-after(5px, 90px, 20px, @purple);
+        .transition(all,.3s);
+    }
+    &:hover{
+        background: @purple;
+        color: @gold;
+        &:after{
+            .btn-after(-5px, 110px, 40px, @purple);
+        }
+    }
+}
+
+.btn-after(@distance, @width, @height, @color){
+    content: '';
+    position: absolute;
+    top: @distance;
+    left: @distance;
+    bottom: @distance;
+    right: @distance;
+    z-index: -1;
+    width: @width;
+    height: @height;
+    background: transparent;
+    border: solid 1px @color;
+}
+
+.input-gold(@input-border-bottom-color, @input-border-bottom-hover-color, @height){
+    width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: solid 1px @input-border-bottom-color;
+    height: @height;
+    background: transparent;
+    outline: none;
+    .transition(all, .5s);
+    &:focus{
+        &::before{
+            content: '';
+        }
+        border-bottom: solid 1px @input-border-bottom-hover-color;
+    }
+}
+
+.transition(@property, @duration){
+    -webkit-transition: @property @duration;
+    -moz-transition: @property @duration;
+    -ms-transition: @property @duration;
+    -o-transition: @property @duration;
+    transition: @property @duration;
+}

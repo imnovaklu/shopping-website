@@ -1,0 +1,54 @@
+@import "../public";
+
+.login-container{
+  position: fixed;
+  top: 150px;
+  right: 0;
+  height: 150px;
+  background: @gold;
+  box-shadow: 0 1px 1px 1px @box-shadow;
+  border: solid 1px @purple;
+  padding: 20px;
+  .transition(all, .5s);
+  input[type="text"], input[type="password"]{
+    .input-gold(@purple, @gold, 28px);
+  }
+  >form{
+    text-align: center;
+    button{
+      margin-top: 20px;
+    }
+  }
+  >.close{
+    width: 20px;
+    height: 150px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: @gold;
+    color: @purple;
+    border-radius: 0;
+    border: 0;
+    line-height: 30px;
+    .transition(background,.3s);
+    &:hover{
+      background: @purple;
+      color: white;
+    }
+  }
+}
+
+.login-container.login-collapsed{
+  width: 20px;
+  padding: 0;
+  input,.btn-gold{
+    display: none;
+  }
+}
+
+.login-container.login-opened{
+  width: 200px;
+}
