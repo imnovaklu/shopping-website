@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Store from '../store';
+import {UISref} from 'ui-router-react';
 import {TOGGLE_LOGIN, LOGIN} from '../constants/actionTypes';
 import $ from 'jquery';
 import {configAJAX, getToken} from '../ajax/token';
@@ -11,6 +12,7 @@ class Login extends Component {
         super(props);
         this.toggleLogin = this.toggleLogin.bind(this);
         this.login = this.login.bind(this);
+        this.manage = this.manage.bind(this);
     }
 
     toggleLogin(){
@@ -61,10 +63,13 @@ class Login extends Component {
                 </form>}
                 {isLogin &&
                 <form autocomplete="off">
-                    <input type="text" disabled="disabled" defaultValue="YOUR USERNAME:"/>
+                    <label>YOUR USERNAME:</label>
                     <input type="text" disabled="disabled" defaultValue={user.loginUser.username}/>
-                    <input type="text" disabled="disabled" defaultValue="YOUR ROLE"/>
+                    <label>YOUR ROLE:</label>
                     <input type="text" disabled="disabled" defaultValue={user.loginUser.role}/>
+                    <UISref to="manage" params={{directory: directory, productId: id}}>
+                        <button className="btn-gold" type="button">MANAGE</button>
+                    </UISref>
                 </form>
                 }
             </div>

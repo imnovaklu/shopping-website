@@ -38,6 +38,11 @@ const womenState = {
                 return getDetails(trans.params().directory, trans.params().productId);
             }
         }]
+    },
+    manageState = {
+        name: 'manage',
+        url: '/manage',
+        component: Manage
     };
 
 const App = () => {

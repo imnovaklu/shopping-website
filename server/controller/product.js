@@ -3,7 +3,8 @@ var express = require('express'),
     mongoClient = require('mongodb').MongoClient,
     store = require('./store'),
     jwt = require('jsonwebtoken'),
-    serverConfig = require('../config');
+    serverConfig = require('../config'),
+    mongo = require('../mongo');
 
 router.get('/', function (req, res) {
     /*var token = req.body.token || req.header['token'] || req.query['token'];
@@ -37,6 +38,27 @@ router.get('/', function (req, res) {
             })*/
             console.log(req.query);
             res.send({name:"test"});
+        }
+    });
+});
+
+router.get('/getAll', function () {
+    var token = req.body.token || req.header['token'] || req.query.token;
+    if(!token) return response.send(res, status.NO_TOKEN);
+    console.log("body: ", req.body, "query: ", req.body);
+
+    jwt.verify(token, process.env.SECRET_KEY, function (err, decode) {
+        if(err){
+            response.send(res, status.INVALID_TOKEN);
+        }else{
+            mongo.find('product', {
+                username: req.body.username,
+                password: req.body.password
+            }, function (data) {
+                return response.send(res, status.SUCCESSFUL, data);
+            }, function () {
+                return response.send(res, status.UNSUCCESSFUL);
+            });
         }
     });
 });

@@ -33,7 +33,7 @@ router.post('/login', function (req, res) {
         if(err){
             response.send(res, status.INVALID_TOKEN);
         }else{
-            mongo.find({
+            mongo.find("user",{
                 username: req.body.username,
                 password: req.body.password
             }, function (data) {
@@ -41,29 +41,6 @@ router.post('/login', function (req, res) {
             }, function () {
                 return response.send(res, status.UNSUCCESSFUL);
             });
-
-            /*if(!('username' in req.body) || !('birthday' in req.body) || !('location' in req.body)){
-                return res.status(404).json({
-                    err: "please provide with valid"
-                });
-            }
-            for(var key in req.body){
-                if(req.body[key] == ""){
-                    return res.status(404).json({
-                        err: "please provide with valid " + key
-                    });
-                }
-            }
-            var len = store.users.length;
-            store.users.push({
-                id: len+1,
-                username: req.body.username,
-                birthday: req.body.birthday,
-                location: req.body.location
-            });
-            return res.status(200).json({
-                succ: "post user successfully!"
-            });*/
         }
     });
 });

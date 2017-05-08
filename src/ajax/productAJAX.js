@@ -23,3 +23,8 @@ export const getDetails = (directory, id) => {
     return fetch('api/product')
         .then(resp => resp.json())
 };
+
+export const getProducts = () => {
+    return fetch('api/product')
+        .then(resp => resp.json())
+};
