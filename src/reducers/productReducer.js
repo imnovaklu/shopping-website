@@ -1,4 +1,4 @@
-import {ADD_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT, SEARCH_PRODUCT, CLEAR_SEARCH} from '../constants/actionTypes';
+import {ADD_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT, SEARCH_PRODUCT, CLEAR_SEARCH, INIT_PRODUCT} from '../constants/actionTypes';
 
 const initState = {
     products: [{
@@ -114,6 +114,9 @@ const productReducer = (state = initState, action) => {
             return newState;
         case CLEAR_SEARCH:
             newState.search_results = newState.products;
+            return newState;
+        case INIT_PRODUCT:
+            newState.products = action.products;
             return newState;
     }
     return newState;

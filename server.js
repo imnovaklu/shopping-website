@@ -18,6 +18,7 @@ new_db.open(function (err, db) {
 });
 
 app.use(express.static(__dirname + '/build'));
+app.use(express.static(__dirname + '/images'));
 app.use(express.static(__dirname + '/node_modules'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
