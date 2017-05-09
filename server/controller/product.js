@@ -1,9 +1,9 @@
 var express = require('express'),
     router = express.Router(),
-    mongoClient = require('mongodb').MongoClient,
     store = require('./store'),
     jwt = require('jsonwebtoken'),
-    serverConfig = require('../config'),
+    status = require('../constants/ajaxStatus'),
+    response = require('./response'),
     mongo = require('../mongo');
 
 router.get('/', function (req, res) {
@@ -42,7 +42,7 @@ router.get('/', function (req, res) {
     });
 });
 
-router.get('/getAll', function () {
+router.post('/getAll', function (req, res) {
     var token = req.body.token || req.header['token'] || req.query.token;
     if(!token) return response.send(res, status.NO_TOKEN);
     console.log("body: ", req.body, "query: ", req.body);
@@ -51,10 +51,7 @@ router.get('/getAll', function () {
         if(err){
             response.send(res, status.INVALID_TOKEN);
         }else{
-            mongo.find('product', {
-                username: req.body.username,
-                password: req.body.password
-            }, function (data) {
+            mongo.findAll('product', {}, function (data) {
                 return response.send(res, status.SUCCESSFUL, data);
             }, function () {
                 return response.send(res, status.UNSUCCESSFUL);

@@ -12,7 +12,6 @@ class Login extends Component {
         super(props);
         this.toggleLogin = this.toggleLogin.bind(this);
         this.login = this.login.bind(this);
-        this.manage = this.manage.bind(this);
     }
 
     toggleLogin(){
@@ -67,7 +66,7 @@ class Login extends Component {
                     <input type="text" disabled="disabled" defaultValue={user.loginUser.username}/>
                     <label>YOUR ROLE:</label>
                     <input type="text" disabled="disabled" defaultValue={user.loginUser.role}/>
-                    <UISref to="manage" params={{directory: directory, productId: id}}>
+                    <UISref to="manage" params={{}}>
                         <button className="btn-gold" type="button">MANAGE</button>
                     </UISref>
                 </form>

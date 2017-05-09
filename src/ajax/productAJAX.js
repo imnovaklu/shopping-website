@@ -1,7 +1,3 @@
-/*
-import $ from 'jquery';
-*/
-
 /*let cache = null;*/
 
 /*
@@ -18,13 +14,37 @@ export const getDetails = (directory, id) => {
         });
     console.log("delay", delay);
 };*/
+import $ from 'jquery';
+import {configAJAX, getToken} from './token';
 
-export const getDetails = (directory, id) => {
-    return fetch('api/product')
-        .then(resp => resp.json())
+export const getDetails = (directory, id, callback) => {
+    fetch('api/product')
+        .then(resp => {
+            callback(resp.json());
+        })
 };
 
-export const getProducts = () => {
-    return fetch('api/product')
-        .then(resp => resp.json())
+export const getProducts = (callback) => {
+    /*getToken(function (token) {
+        fetch('api/product/getAll?token=' + token,{
+            method: "POST"
+        })
+            .then(resp => {
+                callback(resp.json());
+            })
+    })*/
+    getToken((token)=>{
+        console.log(configAJAX('/api/product/getAll', 'POST', {
+            token: token
+        }));
+        $.ajax(configAJAX('/api/product/getAll', 'POST', {
+            token: token
+        }))
+            .done((resp)=>{
+                callback(resp);
+            })
+            .fail((err)=>{
+                console.log("error: ", err);
+            })
+    })
 };
