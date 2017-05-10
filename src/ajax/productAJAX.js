@@ -24,27 +24,16 @@ export const getDetails = (directory, id, callback) => {
         })
 };
 
-export const getProducts = (callback) => {
-    /*getToken(function (token) {
-        fetch('api/product/getAll?token=' + token,{
-            method: "POST"
-        })
-            .then(resp => {
-                callback(resp.json());
-            })
-    })*/
+export const getProducts = (successCallback, errorCallback) => {
     getToken((token)=>{
-        console.log(configAJAX('/api/product/getAll', 'POST', {
-            token: token
-        }));
         $.ajax(configAJAX('/api/product/getAll', 'POST', {
             token: token
         }))
             .done((resp)=>{
-                callback(resp);
+                successCallback(resp);
             })
             .fail((err)=>{
-                console.log("error: ", err);
+                errorCallback(err);
             })
     })
 };

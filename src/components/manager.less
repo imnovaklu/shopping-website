@@ -9,4 +9,32 @@ thead{
 
 td {
   vertical-align: middle !important;
+  color: @purple;
+  input{
+    color: @purple;
+  }
+}
+
+.row{
+  margin-top: 120px;
+}
+
+.reduced-width{
+  max-width: 120px;
+}
+
+.table-hover{
+  tbody{
+    >tr{
+      &:hover{
+        background: @gold !important;
+      }
+    }
+  }
+}
+
+.table-theme{
+  input[type="text"]{
+    .input-gold(@purple, @gold, 28px);
+  }
 }

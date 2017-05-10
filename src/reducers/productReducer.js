@@ -1,98 +1,10 @@
-import {ADD_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT, SEARCH_PRODUCT, CLEAR_SEARCH, INIT_PRODUCT} from '../constants/actionTypes';
+import {ADD_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT, SEARCH_PRODUCT, CLEAR_SEARCH, INIT_PRODUCT, FETCH_PRODUCT_START, FETCH_PRODUCT_FAILED} from '../constants/actionTypes';
 
 const initState = {
-    products: [{
-        id: 1,
-        directory: "women",
-        name: "Opel",
-        price: 125.15,
-        discount: 125.15,
-        imgUrl: "http://allswalls.com/images/tiger-wallpaper-54.jpg"
-    }, {
-        id: 2,
-        directory: "women",
-        name: "Skoda",
-        price: 140.70,
-        discount: 100.00,
-        imgUrl: "http://allswalls.com/images/tiger-wallpaper-54.jpg"
-    }, {
-        id: 3,
-        directory: "women",
-        name: "Toyota",
-        price: 37.99,
-        discount: 19.99,
-        imgUrl: "http://allswalls.com/images/tiger-wallpaper-54.jpg"
-    }, {
-        id: 4,
-        directory: "girls",
-        name: "Opel",
-        price: 125.15,
-        discount: 125.15,
-        imgUrl: "http://allswalls.com/images/tiger-wallpaper-50.jpg"
-    }, {
-        id: 5,
-        directory: "girls",
-        name: "Skoda",
-        price: 140.70,
-        discount: 100.00,
-        imgUrl: "http://allswalls.com/images/tiger-wallpaper-50.jpg"
-    }, {
-        id: 6,
-        directory: "girls",
-        name: "Toyota",
-        price: 37.99,
-        discount: 19.99,
-        imgUrl: "http://allswalls.com/images/tiger-wallpaper-50.jpg"
-    }, {
-        id: 7,
-        directory: "girls",
-        name: "Toyota",
-        price: 37.99,
-        discount: 19.99,
-        imgUrl: "http://allswalls.com/images/tiger-wallpaper-50.jpg"
-    }, {
-        id: 8,
-        directory: "girls",
-        name: "Toyota",
-        price: 37.99,
-        discount: 19.99,
-        imgUrl: "http://allswalls.com/images/tiger-wallpaper-50.jpg"
-    }, {
-        id: 9,
-        directory: "kids",
-        name: "Opel",
-        price: 125.15,
-        discount: 125.15,
-        imgUrl: "http://allswalls.com/images/tiger-wallpaper-40.jpg"
-    }, {
-        id: 10,
-        directory: "kids",
-        name: "Skoda",
-        price: 140.70,
-        discount: 100.00,
-        imgUrl: "http://allswalls.com/images/tiger-wallpaper-40.jpg"
-    }, {
-        id: 11,
-        directory: "kids",
-        name: "Toyota",
-        price: 37.99,
-        discount: 19.99,
-        imgUrl: "http://allswalls.com/images/tiger-wallpaper-40.jpg"
-    }, {
-        id: 12,
-        directory: "kids",
-        name: "Toyota",
-        price: 37.99,
-        discount: 19.99,
-        imgUrl: "http://allswalls.com/images/tiger-wallpaper-40.jpg"
-    }, {
-        id: 13,
-        directory: "kids",
-        name: "Toyota",
-        price: 37.99,
-        discount: 19.99,
-        imgUrl: "http://allswalls.com/images/tiger-wallpaper-40.jpg"
-    }]
+    products: [],
+    fetching: false,
+    fetched: false,
+    error: null
 };
 
 initState.search_results = [...initState.products];
@@ -117,6 +29,16 @@ const productReducer = (state = initState, action) => {
             return newState;
         case INIT_PRODUCT:
             newState.products = action.products;
+            newState.fetching = false;
+            newState.fetched = true;
+            return newState;
+        case FETCH_PRODUCT_START:
+            newState.fetching = true;
+            return newState;
+        case FETCH_PRODUCT_FAILED:
+            newState.fetching = false;
+            newState.fetched = false;
+            newState.error = action.error;
             return newState;
     }
     return newState;
